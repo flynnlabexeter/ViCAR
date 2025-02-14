@@ -1,11 +1,12 @@
 Four scripts are provided for processing ViCAR data
-Script1 (demultiplex.sh) uses demuxFQ to demultiplex fastqs. 
 
-Script2 (read2.sh) 1 generates bigWig files for read2 fastqs. Adapted from https://github.com/flynnlabexeter/CUT-Tag
+Script 1 (demultiplex.sh) uses demuxFQ to demultiplex fastqs. 
 
-Script3 (pairtools_hic.sh) generates hi-c statistics, and .pairs .hic files. **Adapted from Dovetail Genomics HiChIP documentation https://hichip.readthedocs.io/en/latest/**
+Script 2 (read2.sh) 1 generates bigWig files for read2 fastqs. Adapted from https://github.com/flynnlabexeter/CUT-Tag
 
-Script4 uses FitHiChIP to call loops in 3D data. See FitHiChIP documentation **https://ay-lab.github.io/FitHiChIP/html/index.html**
+Script 3 (pairtools_hic.sh) generates hi-c statistics, and .pairs .hic files. **Adapted from Dovetail Genomics HiChIP documentation https://hichip.readthedocs.io/en/latest/**
+
+Script 4 uses FitHiChIP to call loops in 3D data. See FitHiChIP documentation **https://ay-lab.github.io/FitHiChIP/html/index.html**
 
 Among others, consider citing:
 1. Open2C; Abdennur N, Fudenberg G, Flyamer IM, Galitsyna AA, Goloborodko A, Imakaev M, Venev SV. Pairtools: From sequencing data to chromosome contacts. PLoS Comput Biol. 2024 May 29;20(5):e1012164. doi: 10.1371/journal.pcbi.1012164.
