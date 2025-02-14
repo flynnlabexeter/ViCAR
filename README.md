@@ -2,7 +2,8 @@ Four scripts are provided for processing ViCAR data
 
 Script 1 (demultiplex.sh) uses demuxFQ to demultiplex fastqs. 
 
-Script 2 (read2.sh) 1 generates bigWig files for read2 fastqs. Adapted from https://github.com/flynnlabexeter/CUT-Tag
+Script 2a (Read1.sh) generates bigWig files for Read1 fastqs. Adapted from https://github.com/flynnlabexeter/CUT-Tag
+Script 2b (Read2.sh) generates bigWig files for Read2 fastqs. Adapted from https://github.com/flynnlabexeter/CUT-Tag
 
 Script 3 (pairtools_hic.sh) generates hi-c statistics, and .pairs .hic files. **Adapted from Dovetail Genomics HiChIP documentation https://hichip.readthedocs.io/en/latest/**
 
