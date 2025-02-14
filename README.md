@@ -13,6 +13,7 @@ Among others, consider citing:
 2. Bhattacharyya S, Chandra V, Vijayanand P, Ay F. Identification of significant chromatin contacts from HiChIP data by FitHiChIP. Nat Commun. 2019 Sep 17;10(1):4221. doi: 10.1038/s41467-019-11950-y.
 
 **Dependencies**
+
 Ensure the following software is installed
 
 For script 1
