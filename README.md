@@ -1,4 +1,4 @@
-Four scripts are provided for processing ViCAR data
+Four scripts are provided for processing ViCAR data.
 
 Script 1 (demultiplex.sh) uses demuxFQ to demultiplex fastqs. 
 
