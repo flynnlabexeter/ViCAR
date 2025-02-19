@@ -9,7 +9,7 @@ Script 3 (pairtools_hic.sh) generates hi-c statistics, and .pairs .hic files. **
 
 Script 4 (coming soon) uses FitHiChIP to call loops in 3D data. **See FitHiChIP documentation https://ay-lab.github.io/FitHiChIP/html/index.html**
 
-Among others, consider citing:
+Consider citing tools involved, including:
 1. Open2C; Abdennur N, Fudenberg G, Flyamer IM, Galitsyna AA, Goloborodko A, Imakaev M, Venev SV. Pairtools: From sequencing data to chromosome contacts. PLoS Comput Biol. 2024 May 29;20(5):e1012164. doi: 10.1371/journal.pcbi.1012164.
 2. Bhattacharyya S, Chandra V, Vijayanand P, Ay F. Identification of significant chromatin contacts from HiChIP data by FitHiChIP. Nat Commun. 2019 Sep 17;10(1):4221. doi: 10.1038/s41467-019-11950-y.
 
