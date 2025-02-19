@@ -7,7 +7,7 @@ Script 2b (Read2.sh) generates bigWig files for Read2 fastqs. Adapted from https
 
 Script 3 (pairtools_hic.sh) generates hi-c statistics, and .pairs .hic files. **Adapted from Dovetail Genomics HiChIP documentation https://hichip.readthedocs.io/en/latest/**
 
-Script 4 uses FitHiChIP to call loops in 3D data. **See FitHiChIP documentation https://ay-lab.github.io/FitHiChIP/html/index.html**
+Script 4 (coming soon) uses FitHiChIP to call loops in 3D data. **See FitHiChIP documentation https://ay-lab.github.io/FitHiChIP/html/index.html**
 
 Among others, consider citing:
 1. Open2C; Abdennur N, Fudenberg G, Flyamer IM, Galitsyna AA, Goloborodko A, Imakaev M, Venev SV. Pairtools: From sequencing data to chromosome contacts. PLoS Comput Biol. 2024 May 29;20(5):e1012164. doi: 10.1371/journal.pcbi.1012164.
