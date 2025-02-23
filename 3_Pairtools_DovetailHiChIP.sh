@@ -3,23 +3,45 @@
 #SBATCH -n 16
 #SBATCH --mem 48G
 #SBATCH -t 36:00:00
-#SBATCH -o Pairtools_DovetailHiChIP.out
-#SBATCH -e Pairtools_DovetailHiChIP.err
+#SBATCH -o ViCAR_Pairtools.out
+#SBATCH -e ViCAR_Pairtools.err
 
-/path/to/bwa/bwa-0.7.17/bwa mem -t 16 /path/to/genomes/hg38/fasta/hsa.hg38.fa /path/to/fastqs/demult/sample1.r1.fq.gz  /path/to/fastqs/demult/sample1.r2.fq.gz > /path/to/fastqs/demult/sample1.sam
+# Activate the Conda environment
+conda activate my_conda
 
-/home/flynn02/.local/bin/pairtools parse --min-mapq 30 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in 8 --nproc-out 8 --chroms-path /path/to/genomes/hg38/fasta/hsa.hg38.fa /path/to/fastqs/demult/sample1.sam > /path/to/fastqs/demult/sample1.pairsam
+# Set paths to necessary files
+FASTQ_DIR="/path/to/fastqs"
+GENOME="/path/to/genomes/hg38.fa"
+# Ensure HiChIP directory is installed https://hichip.readthedocs.io/en/latest/before_you_begin.html
+HICHIP_DIR="/path/to/HiChiP"
+JUICETOOLS_JAR="${HICHIP_DIR}/juicertools.jar"
+FASTQ_R1="${FASTQ_DIR}/myrun.r_1.fq.gz"
+FASTQ_R2="${FASTQ_DIR}/myrun.r_2.fq.gz"
 
-pairtools sort --nproc 16 --tmpdir=/set/path/to/temp sample1.pairsam > sample1.sorted.pairsam
+# Perform BWA MEM alignment
+bwa mem -t 16 ${GENOME} ${FASTQ_R1} ${FASTQ_R2} > myrun.sam
 
-pairtools dedup --nproc-in 8 --nproc-out 8 --mark-dups --output-stats sample1_stats.txt --output sample1_dedup.pairsam sample1.sorted.pairsam
+# Parse the SAM file with pairtools
+pairtools parse --min-mapq 30 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in 8 --nproc-out 8 --chroms-path ${GENOME} myrun.sam > myrun.pairsam
 
-pairtools split --nproc-in 8 --nproc-out 8 --output-pairs sample1_mapped.pairs --output-sam sample1_unsorted.bam sample1_dedup.pairsam
+# Sort the pairsam file
+# Make sure you have created temp directory
+pairtools sort --nproc 16 --tmpdir=/path/to/temp myrun.pairsam > myrun.sorted.pairsam
 
-samtools sort -@16 -T path/to/temp/temp.bam -o sample1_mapped.PT.bam sample1_unsorted.bam
+# Deduplicate the sorted pairsam file
+pairtools dedup --nproc-in 8 --nproc-out 8 --mark-dups --output-stats myrun_stats.txt --output myrun_dedup.pairsam myrun.sorted.pairsam
 
-samtools index sample1_mapped.PT.bam
+# Split the deduplicated pairsam file into pairs and a BAM file
+pairtools split --nproc-in 8 --nproc-out 8 --output-pairs myrun_mapped.pairs --output-sam myrun_unsorted.bam myrun_dedup.pairsam
 
-path/to/python/python-3.8.7/bin/python3 /path/to/HiChiP/get_qc.py -p sample1_stats.txt
+# Sort the BAM file with samtools
+#samtools sort -@16 -T /path/to/temp/temp.bam -o myrun_4_mapped.PT.bam myrun_unsorted.bam
 
-path/to/java/jdk1.8.0_192/bin/java -Xmx48000m -Djava.awt.headless=true -jar /path/to/HiChiP/juicertools.jar pre --threads 16 sample1_mapped.pairs sample1_contact_map.hic /path/to/genomes/hg38/fasta/hg38.genome
+# Index the sorted BAM file
+samtools index myrun_mapped.PT.bam
+
+# Run the get_qc.py script for QC
+python3 ${HICHIP_DIR}/get_qc.py -p myrun_stats.txt
+
+# Generate the contact map using juicertools
+path/to/java -Xmx48000m -Djava.awt.headless=true -jar ${JUICETOOLS_JAR} pre --threads 16 myrun_mapped.pairs myrun_contact_map.hic ${GENOME}
